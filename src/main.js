@@ -3,8 +3,9 @@ const path = require('path');
 const { promisify } = require('util');
 const { Tokenizer } = require("tokenizers");
 const fs = require('fs');
-
+const mlStuff = require("./machineLearning");
 const tokenizerFilePath = process.argv[2];
+
 
 /////// TOKENIZER ////////
 function tokenizer(path) {
@@ -32,11 +33,12 @@ const createWindow = () => {
       devTools: true,
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
+      contextIsolation: false
     },
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL("./index.html");
+  mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

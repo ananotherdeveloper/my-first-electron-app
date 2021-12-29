@@ -9,7 +9,7 @@
     "node": "14.18.0"
   },
   "scripts": {
-    "start": "npx electron-build-env electron-forge start -- $PWD/tokenizer.json",
+    "start": "npx electron-build-env electron-forge start -- F:\\Work-Projects\\Flip\\my-first-electron-app\\tokenizer.json",
     "package": "electron-forge package",
     "re-build": "npx electron-build-env electron-rebuild -f",
     "make": "electron-forge make",
