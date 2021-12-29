@@ -6,10 +6,10 @@
   "main": ".webpack/main",
   "private": true,
   "engines": {
-    "node": "14.18.2"
+    "node": "14.18.0"
   },
   "scripts": {
-    "start": "npx electron-build-env electron-forge start",
+    "start": "npx electron-build-env electron-forge start -- $PWD/tokenizer.json",
     "package": "electron-forge package",
     "re-build": "npx electron-build-env electron-rebuild -f",
     "make": "electron-forge make",

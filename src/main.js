@@ -4,9 +4,19 @@ const { promisify } = require('util');
 const { Tokenizer } = require("tokenizers");
 const fs = require('fs');
 
-const tokenizer = (filePath) => promisify(Tokenizer.fromFile(filePath).encode);
-const decodeTokenizer = (filePath) => promisify(Tokenizer.fromFile(filePath).decode);
+const tokenizerFilePath = process.argv[2];
 
+/////// TOKENIZER ////////
+function tokenizer(path) {
+  let tok = Tokenizer.fromFile(path);
+  return promisify(tok.encode.bind(tok));
+}
+
+function decodeTokenizer(path) {
+  let tok = Tokenizer.fromFile(path);
+  return promisify(tok.decode.bind(tok));
+}
+//////
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -63,8 +73,11 @@ app.on('activate', () => {
 /// SAMPLE FLOW /////
 
 async function loadMLStuff() {
+  const text = "Hey Sunil! Do some magic!";
 
-  let encode = tokenizer("../tokenizer.json");
+  console.log("FilePath: " + tokenizerFilePath);
+
+  let encode = tokenizer(tokenizerFilePath);
   let output = await encode(text);
   console.log(output);
 }
